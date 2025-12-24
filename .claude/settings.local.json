@@ -23,7 +23,12 @@
       "WebFetch(domain:docs.expo.dev)",
       "Bash(yarn install:*)",
       "Bash(yarn workspace:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:documentation.jumio.ai)",
+      "WebFetch(domain:docs.didit.me)",
+      "Bash(npx expo install:*)",
+      "Bash(yarn type-check:*)",
+      "Bash(npm run type-check:all:*)"
     ],
     "deny": []
   }

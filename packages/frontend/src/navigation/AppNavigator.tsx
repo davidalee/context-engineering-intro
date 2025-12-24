@@ -10,6 +10,11 @@ import {
   MFAEnrollScreen,
   MFAVerifyScreen,
 } from '../screens/auth'
+import {
+  VerificationIntroScreen,
+  VerificationWebViewScreen,
+  VerificationCompleteScreen,
+} from '../screens/verification'
 import { useAuth } from '../contexts/AuthContext'
 import { colors } from '../theme/colors'
 
@@ -24,6 +29,9 @@ export type AppStackParamList = {
   Home: undefined
   MFAEnroll: undefined
   PostCreation: undefined
+  VerificationIntro: undefined
+  VerificationWebView: { verificationUrl: string; sessionId: string }
+  VerificationComplete: { sessionId: string }
 }
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -69,6 +77,21 @@ function MainNavigator() {
         name="PostCreation"
         component={PostCreationScreen}
         options={{ title: 'Share Experience' }}
+      />
+      <AppStack.Screen
+        name="VerificationIntro"
+        component={VerificationIntroScreen}
+        options={{ title: 'Identity Verification' }}
+      />
+      <AppStack.Screen
+        name="VerificationWebView"
+        component={VerificationWebViewScreen}
+        options={{ title: 'Verify Your Identity', headerBackVisible: false }}
+      />
+      <AppStack.Screen
+        name="VerificationComplete"
+        component={VerificationCompleteScreen}
+        options={{ title: 'Verification Status', headerBackVisible: false }}
       />
     </AppStack.Navigator>
   )

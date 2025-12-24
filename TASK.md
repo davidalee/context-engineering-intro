@@ -6,6 +6,56 @@
 - [x] Generated project-scaffolding.md PRP
 - [x] Generated authentication.md PRP
 - [x] Generated posting-content-mvp.md PRP
+- [x] Generated identity-verification-deep-integration.md PRP (Jumio - deprecated)
+
+### 2025-12-24 - PRP Generation
+- [x] Rewrote identity-verification-deep-integration.md PRP for Didit.me (replaces Jumio)
+
+### 2025-12-24 - Identity Verification Deep Integration - Didit.me (PRP Executed)
+- [x] PRP Generated: PRPs/identity-verification-deep-integration.md (v2.0 - Didit.me)
+
+#### Backend Migration Tasks (Jumio → Didit.me)
+**REUSE (no changes needed):**
+- [x] Database schema (userVerificationStatus table) - statuses already compatible
+- [x] Shared types (VerificationStatus) - already matches Didit statuses
+
+**CREATE (new files):**
+- [x] Create packages/backend/src/config/didit.ts (x-api-key auth pattern)
+- [x] Create packages/backend/src/services/didit.service.ts (createSession, mapDiditStatus)
+- [x] Create packages/backend/src/routes/verification.routes.ts (POST /, GET /status)
+- [x] Create packages/shared/src/schemas/verification.schemas.ts (Zod schemas)
+
+**MODIFY (update existing):**
+- [x] Modify packages/backend/src/routes/webhooks.routes.ts (add /didit endpoint with timestamp validation)
+- [x] Modify packages/backend/src/services/verification.service.ts (minor - already compatible)
+- [x] Modify packages/backend/src/index.ts (mount /api/verification routes)
+
+**CLEANUP (optional - after verified working):**
+- [ ] Remove packages/backend/src/config/jumio.ts
+- [ ] Remove packages/backend/src/services/jumio.service.ts
+- [ ] Remove /jumio webhook endpoint from webhooks.routes.ts
+
+#### Frontend Tasks (new implementation)
+- [x] Install react-native-webview
+- [x] Create packages/frontend/src/services/verification.service.ts
+- [x] Create packages/frontend/src/screens/verification/VerificationIntroScreen.tsx
+- [x] Create packages/frontend/src/screens/verification/VerificationWebViewScreen.tsx
+- [x] Create packages/frontend/src/screens/verification/VerificationCompleteScreen.tsx
+- [x] Create packages/frontend/src/screens/verification/index.ts (barrel export)
+- [x] Create packages/frontend/src/components/verification/VerificationBadge.tsx
+- [x] Create packages/frontend/src/components/verification/VerificationStatusCard.tsx
+- [x] Create packages/frontend/src/components/verification/index.ts (barrel export)
+- [x] Modify packages/frontend/src/contexts/AuthContext.tsx (add verificationStatus)
+- [x] Modify packages/frontend/src/navigation/AppNavigator.tsx (add verification screens)
+- [ ] Modify packages/frontend/src/utils/deepLinking.ts (handle Didit callbacks) - optional
+
+#### Validation
+- [x] yarn type-check passes for all packages
+- [ ] Backend POST /api/verification returns verificationUrl (requires API key)
+- [ ] Backend GET /api/verification/status returns current status (requires API key)
+- [ ] Webhook signature verification works with Didit (requires webhook secret)
+- [ ] Frontend WebView loads Didit verification UI (requires running backend)
+- [ ] End-to-end flow works on physical device (requires Didit credentials)
 
 ### 2025-12-23 - Project Scaffolding (PRP Executed)
 - [x] Created root workspace configuration (package.json)
@@ -74,16 +124,97 @@
 
 ---
 
-## Pending Tasks (Next PRPs)
+## Pending Tasks
 
-### Identity Verification Integration PRP (Next)
-- [ ] Jumio/Onfido API integration
-- [ ] Selfie analysis
-- [ ] Verification workflow
+### 2. Dashboard PRP (Priority: High)
+- [ ] Dashboard screen (first screen after login)
+- [ ] Recent activity feed
+- [ ] Alerts and comments overview
+- [ ] Quick action buttons (post, view alerts, manage profile)
 
-### Moderation Queue UI PRP
-- [ ] Admin dashboard
-- [ ] Human review workflow
+### 3. Generate PRP: Search PRP (Priority: High)
+- [ ] Name search with PostgreSQL full-text search
+- [ ] Reverse image search integration (TinEye, Google Vision API)
+- [ ] Keyword search for prompts
+- [ ] Location-based filtering
+- [ ] Saved alerts for specific names (push notification triggers)
+
+### 4. Generate PRP: Moderation System PRP (Priority: High)
+- [ ] User reporting flow (frontend + backend)
+- [ ] Admin tools UI (user management: ban, suspend, warn)
+- [ ] Post management (edit, remove, flag)
+- [ ] Content review queues (human review workflow)
+- [ ] AI-based content flagging (expand on existing OpenAI moderation)
+- [ ] Audit logs for moderator actions
+- [ ] Appeals process for users
+
+### 5. Generate PRP: Notifications PRP (Priority: Medium)
+- [ ] Push notification infrastructure (Expo Push, Firebase)
+- [ ] Name match alerts
+- [ ] New comment notifications
+- [ ] Moderation action notifications
+- [ ] Notification preferences settings
+
+### 6. Generate PRP: Privacy & Security PRP (Priority: Medium)
+- [ ] Screenshot blocking (react-native-screenshot-prevent)
+- [ ] Screen recording prevention
+- [ ] Secure view containers for sensitive content
+
+### 7. Generate PRP: Photo Upload PRP (Priority: Medium)
+- [ ] Image upload on posts and comments
+- [ ] Image storage (Supabase Storage or S3)
+- [ ] Image compression and optimization
+- [ ] NSFW image detection
+
+### 8. Generate PRP: Background Check Integration PRP (Priority: Low)
+- [ ] Checkr/GoodHire API integration
+- [ ] Sex offender registry lookup
+- [ ] Paid feature gating (Stripe/RevenueCat)
+- [ ] Results display UI
+
+### 9. Generate PRP: Real-time Updates PRP (Priority: Low)
+- [ ] WebSocket infrastructure
+- [ ] Live comment updates
+- [ ] Real-time notifications
+- [ ] Online presence indicators
+
+### 10. Generate PRP: Legal & Compliance PRP (Priority: Low)
+- [ ] GDPR/CCPA compliance features
+- [ ] Data export functionality
+- [ ] Account deletion flow
+- [ ] Data retention policies
+- [ ] Terms of Service / Privacy Policy screens
+
+### 11. Create PLANNING.md Document
+- [ ] Document overall project architecture, goals, style, and constraints
+- [ ] Define naming conventions, file structure, and architecture patterns
+- [ ] Outline testing strategies and reliability goals
+
+### 12. Add messaging around compliance and safety in the app
+- [ ] Onboarding screens
+- [ ] FAQ section
+- [ ] In-app tips and reminders
+- [ ] (TODO: REVISE THIS LIST) Comply with KYC, AML, CCPA, GDPR and many more privacy regulations and directives
+- [ ] Data encryption at rest and in transit using industry-standard protocols
+- [ ] Regular security audits and vulnerability assessments
+- [ ] User data access controls and permissions management
+- [ ] Incident response plan for data breaches or security incidents
+- [ ] Employee training on data privacy and security best practices
+- [ ] Clear data retention and deletion policies communicated to users
+- [ ] Third-party vendor risk management for any integrated services
+- [ ] Continuous monitoring of systems for suspicious activity or potential threats
+- [ ] Compliance with international data transfer regulations (e.g., GDPR cross-border rules)
+- [ ] Regular updates to privacy policies and terms of service to reflect current practices and legal requirements
+- [ ] User-friendly mechanisms for users to manage their privacy settings and data preferences
+- [ ] Accessibility features to ensure compliance with standards like WCAG for users with disabilities
+- [ ] Implementation of multi-factor authentication (MFA) for enhanced account security
+- [ ] Secure coding practices to prevent common vulnerabilities (e.g., OWASP Top 10)
+- [ ] Data anonymization techniques for any analytics or research purposes
+- [ ] Regular backups of user data with secure storage solutions
+- [ ] Transparent communication with users regarding any changes to data practices or security measures
+- [ ] Collaboration with legal experts to stay updated on evolving data protection laws and regulations
+- [ ] Implementation of user consent mechanisms for data collection and processing activities
+- [ ] All data is transmitted and stored with strong AES 256-bit encryption. Didit.me handles identity verification with AI-native fraud detection
 
 ---
 
@@ -111,8 +242,19 @@
 - Brand voice copy follows BRAND_VOICE_GUIDE.md (measured, not moralizing)
 
 ### Notes for Environment Setup
-- Backend requires: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, JUMIO_API_TOKEN, JUMIO_API_SECRET, OPENAI_API_KEY
+- Backend requires: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY
+- Backend requires (Didit.me): DIDIT_API_KEY, DIDIT_WORKFLOW_ID, DIDIT_WEBHOOK_SECRET, API_URL
+- Backend deprecated (Jumio): JUMIO_API_TOKEN, JUMIO_API_SECRET, JUMIO_DATACENTER, JUMIO_WEBHOOK_SECRET
 - Frontend requires: EXPO_PUBLIC_API_URL, EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_ANON_KEY
+
+### Notes for Identity Verification Migration (Jumio → Didit.me)
+- Didit.me uses simpler x-api-key header auth (vs Jumio's Basic Auth)
+- Didit.me has 8 statuses that map to our 5: Not Started→pending, In Progress/In Review→processing, Approved→approved, Declined→denied, Expired/Abandoned/KYC Expired→error
+- Webhook signature uses HMAC-SHA256 + timestamp validation (must validate within 5 minutes)
+- CRITICAL: Use raw JSON body for HMAC verification, not re-stringified
+- Existing verification.service.ts is mostly reusable (updateVerificationStatus works with both)
+- Database schema already compatible - no migration needed
+- Rate limits: Free plan = 5 sessions/minute, Paid = 600 sessions/minute
 
 ---
 

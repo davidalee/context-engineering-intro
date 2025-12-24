@@ -31,7 +31,8 @@
     "react-native-qrcode-svg": "^6.3.21",
     "react-native-safe-area-context": "^4.14.0",
     "react-native-screens": "~4.4.0",
-    "react-native-svg": "^15.15.1"
+    "react-native-svg": "^15.15.1",
+    "react-native-webview": "^13.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.0",

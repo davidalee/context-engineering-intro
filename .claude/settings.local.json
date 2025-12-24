@@ -22,7 +22,8 @@
       "WebFetch(domain:supabase.com)",
       "WebFetch(domain:docs.expo.dev)",
       "Bash(yarn install:*)",
-      "Bash(yarn workspace:*)"
+      "Bash(yarn workspace:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": []
   }

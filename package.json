@@ -1,0 +1,44 @@
+{
+  "name": "betweenus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BetweenUs - Dating safety reporting platform",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:backend": "npm run build --workspace=packages/backend",
+    "build:all": "npm run build:shared && npm run build:backend",
+    "test:backend": "npm run test --workspace=packages/backend",
+    "test:frontend": "npm run test --workspace=packages/frontend",
+    "test:all": "npm run test --workspaces --if-present",
+    "lint:backend": "npm run lint --workspace=packages/backend",
+    "lint:frontend": "npm run lint --workspace=packages/frontend",
+    "lint:all": "npm run lint --workspaces --if-present",
+    "type-check:shared": "npm run type-check --workspace=packages/shared",
+    "type-check:backend": "npm run type-check --workspace=packages/backend",
+    "type-check:frontend": "npm run type-check --workspace=packages/frontend",
+    "type-check:all": "npm run type-check --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=packages/backend",
+    "db:migrate": "npm run db:migrate --workspace=packages/backend",
+    "db:studio": "npm run db:studio --workspace=packages/backend",
+    "clean": "rm -rf packages/*/dist packages/*/node_modules node_modules",
+    "postinstall": "npm run build:shared"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.19.4",
+    "npm": ">=10.0.0"
+  },
+  "overrides": {
+    "react": "^19.0.0",
+    "react-native": "^0.76.0"
+  }
+}

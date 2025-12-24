@@ -2,7 +2,7 @@ import React from 'react'
 import { ActivityIndicator, View, StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeScreen } from '../screens/HomeScreen'
+import { HomeScreen, PostCreationScreen } from '../screens'
 import {
   LoginScreen,
   SignUpScreen,
@@ -23,6 +23,7 @@ export type AuthStackParamList = {
 export type AppStackParamList = {
   Home: undefined
   MFAEnroll: undefined
+  PostCreation: undefined
 }
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -63,6 +64,11 @@ function MainNavigator() {
         name="MFAEnroll"
         component={MFAEnrollScreen}
         options={{ title: 'Set Up 2FA' }}
+      />
+      <AppStack.Screen
+        name="PostCreation"
+        component={PostCreationScreen}
+        options={{ title: 'Share Experience' }}
       />
     </AppStack.Navigator>
   )

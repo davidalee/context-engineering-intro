@@ -46,16 +46,44 @@
 - [ ] Create backend auth tests (deferred)
 - [ ] Create frontend auth tests (deferred)
 
+### 2025-12-23 - Posting Content MVP (PRP Executed)
+- [x] Installed OpenAI dependency in backend
+- [x] Added posts table to database schema (id, userId, originalText, rewrittenText, status, moderationFlags, triggerMatches)
+- [x] Created shared post validation schemas (Zod) - createPostSchema, rewriteRequestSchema, analyzeContentSchema
+- [x] Created trigger patterns utility with all 10 categories from INLINE_TOOLTIPS.md
+- [x] Created brand voice utility with copy templates for OpenAI prompts and error messages
+- [x] Created OpenAI configuration
+- [x] Created content filter service (analyzeContent, hasBlockingContent, getMatchedCategories)
+- [x] Created auto-rewrite service (generateRewrites with OpenAI GPT-4o-mini)
+- [x] Created moderation service (moderateContent with OpenAI Moderation API)
+- [x] Created validation middleware (validateRequest, validateQuery, validateParams)
+- [x] Created posts service (createPost, getPostById, getPostsByUserId, updatePostWithRewrite, deletePost)
+- [x] Created posts controller (handleCreatePost, handleGetPost, handleGetMyPosts, handleAnalyzeContent, handleRewriteRequest)
+- [x] Created posts routes (/api/posts, /api/posts/:id, /api/posts/me, /api/posts/analyze, /api/posts/rewrite)
+- [x] Created frontend API service (posts.service.ts with axios)
+- [x] Created usePostValidation hook with debounced client-side pattern matching
+- [x] Created InlineTooltip component (warning display with rewrite button)
+- [x] Created RewriteSuggestion component (3 one-tap rewrite options)
+- [x] Created ConfirmationChecklist component (3 required checkboxes)
+- [x] Created PostForm component (full post creation flow)
+- [x] Created PostCreationScreen
+- [x] Updated navigation with PostCreation route
+- [x] Validated: yarn type-check passes for all packages
+- [ ] Create backend posts tests (deferred)
+- [ ] Create frontend posts tests (deferred)
+
 ---
 
 ## Pending Tasks (Next PRPs)
 
-### Posting Content MVP PRP (Next)
-- [ ] Execute posting-content-mvp.md PRP
-- [ ] Content filtering service
-- [ ] Auto-rewrite service (OpenAI)
-- [ ] Post creation flow
-- [ ] Inline tooltips
+### Identity Verification Integration PRP (Next)
+- [ ] Jumio/Onfido API integration
+- [ ] Selfie analysis
+- [ ] Verification workflow
+
+### Moderation Queue UI PRP
+- [ ] Admin dashboard
+- [ ] Human review workflow
 
 ---
 
@@ -74,8 +102,16 @@
 - Expo SDK 52
 - Using @react-navigation/native-stack
 
+### Notes for Posting Content MVP PRP
+- 10 trigger categories from INLINE_TOOLTIPS.md implemented with regex patterns
+- OpenAI GPT-4o-mini used for rewrites (cost-effective)
+- OpenAI Moderation API (free) used for content flagging
+- Posts store both originalText and rewrittenText for legal defensibility
+- Client-side validation is lightweight (debounced), full validation on server
+- Brand voice copy follows BRAND_VOICE_GUIDE.md (measured, not moralizing)
+
 ### Notes for Environment Setup
-- Backend requires: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, JUMIO_API_TOKEN, JUMIO_API_SECRET
+- Backend requires: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, JUMIO_API_TOKEN, JUMIO_API_SECRET, OPENAI_API_KEY
 - Frontend requires: EXPO_PUBLIC_API_URL, EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_ANON_KEY
 
 ---

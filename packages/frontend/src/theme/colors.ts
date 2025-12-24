@@ -19,9 +19,13 @@ export const colors = {
   borderDark: '#D1D5DB',
 
   success: '#10B981',
+  successBackground: '#D1FAE5',
   warning: '#F59E0B',
+  warningBackground: '#FEF3C7',
   error: '#EF4444',
+  errorBackground: '#FEE2E2',
   info: '#3B82F6',
+  infoBackground: '#DBEAFE',
 
   white: '#FFFFFF',
   black: '#000000',

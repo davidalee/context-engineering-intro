@@ -1,6 +1,13 @@
-import { pgTable, integer, text, timestamp, uuid, boolean, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, integer, text, timestamp, uuid, boolean, pgEnum, jsonb } from 'drizzle-orm/pg-core'
 
 export const appRoleEnum = pgEnum('app_role', ['admin', 'moderator', 'member'])
+
+export const postStatusEnum = pgEnum('post_status', [
+  'draft',
+  'pending_review',
+  'published',
+  'rejected',
+])
 
 export const verificationStatusEnum = pgEnum('verification_status', [
   'pending',
@@ -55,3 +62,38 @@ export type UserRole = typeof userRoles.$inferSelect
 export type NewUserRole = typeof userRoles.$inferInsert
 export type UserVerificationStatus = typeof userVerificationStatus.$inferSelect
 export type NewUserVerificationStatus = typeof userVerificationStatus.$inferInsert
+
+export type ModerationFlags = {
+  flagged: boolean
+  categories: {
+    hate: boolean
+    harassment: boolean
+    sexual: boolean
+    violence: boolean
+    'self-harm': boolean
+  }
+  category_scores: Record<string, number>
+}
+
+export type TriggerMatch = {
+  category: string
+  matched_text: string
+  position: number
+  severity: 'warn' | 'block'
+}
+
+export const posts = pgTable('posts', {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  userId: uuid('user_id').notNull(),
+  originalText: text('original_text').notNull(),
+  rewrittenText: text('rewritten_text'),
+  status: postStatusEnum('status').notNull().default('draft'),
+  moderationFlags: jsonb('moderation_flags').$type<ModerationFlags>(),
+  triggerMatches: jsonb('trigger_matches').$type<TriggerMatch[]>(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  deletedAt: timestamp('deleted_at'),
+})
+
+export type Post = typeof posts.$inferSelect
+export type NewPost = typeof posts.$inferInsert

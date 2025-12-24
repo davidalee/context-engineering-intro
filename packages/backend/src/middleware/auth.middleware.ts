@@ -65,3 +65,5 @@ export function optionalAuth(
 
   authenticateUser(req, res, next)
 }
+
+export const requireAuth = authenticateUser

@@ -28,7 +28,10 @@
       "WebFetch(domain:docs.didit.me)",
       "Bash(npx expo install:*)",
       "Bash(yarn type-check:*)",
-      "Bash(npm run type-check:all:*)"
+      "Bash(npm run type-check:all:*)",
+      "Skill(generate-prp)",
+      "Bash(xargs ls:*)",
+      "WebFetch(domain:orm.drizzle.team)"
     ],
     "deny": []
   }

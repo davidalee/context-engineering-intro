@@ -10,6 +10,9 @@
 
 ### 2025-12-24 - PRP Generation
 - [x] Rewrote identity-verification-deep-integration.md PRP for Didit.me (replaces Jumio)
+- [x] Generated dashboard.md PRP (16 tasks, confidence 8/10)
+- [x] Generated search.md PRP (32 tasks, confidence 7/10) - PostgreSQL FTS, TinEye API, saved alerts
+- [x] Generated moderation-system.md PRP (35 tasks, confidence 7/10) - reporting, queue, admin tools, audit logs, appeals
 
 ### 2025-12-24 - Identity Verification Deep Integration - Didit.me (PRP Executed)
 - [x] PRP Generated: PRPs/identity-verification-deep-integration.md (v2.0 - Didit.me)
@@ -126,29 +129,16 @@
 
 ## Pending Tasks
 
-### 2. Dashboard PRP (Priority: High)
-- [ ] Dashboard screen (first screen after login)
-- [ ] Recent activity feed
-- [ ] Alerts and comments overview
-- [ ] Quick action buttons (post, view alerts, manage profile)
+### Execute PRP: Dashboard (Priority: High)
+- [ ] Execute PRPs/dashboard.md (16 tasks)
 
-### 3. Generate PRP: Search PRP (Priority: High)
-- [ ] Name search with PostgreSQL full-text search
-- [ ] Reverse image search integration (TinEye, Google Vision API)
-- [ ] Keyword search for prompts
-- [ ] Location-based filtering
-- [ ] Saved alerts for specific names (push notification triggers)
+### Execute PRP: Search (Priority: High)
+- [ ] Execute PRPs/search.md (32 tasks)
 
-### 4. Generate PRP: Moderation System PRP (Priority: High)
-- [ ] User reporting flow (frontend + backend)
-- [ ] Admin tools UI (user management: ban, suspend, warn)
-- [ ] Post management (edit, remove, flag)
-- [ ] Content review queues (human review workflow)
-- [ ] AI-based content flagging (expand on existing OpenAI moderation)
-- [ ] Audit logs for moderator actions
-- [ ] Appeals process for users
+### Execute PRP: Moderation System (Priority: High)
+- [ ] Execute PRPs/moderation-system.md (35 tasks)
 
-### 5. Generate PRP: Notifications PRP (Priority: Medium)
+### Generate PRP: Notifications PRP (Priority: Medium)
 - [ ] Push notification infrastructure (Expo Push, Firebase)
 - [ ] Name match alerts
 - [ ] New comment notifications
@@ -246,6 +236,27 @@
 - Backend requires (Didit.me): DIDIT_API_KEY, DIDIT_WORKFLOW_ID, DIDIT_WEBHOOK_SECRET, API_URL
 - Backend deprecated (Jumio): JUMIO_API_TOKEN, JUMIO_API_SECRET, JUMIO_DATACENTER, JUMIO_WEBHOOK_SECRET
 - Frontend requires: EXPO_PUBLIC_API_URL, EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_ANON_KEY
+
+### Notes for Dashboard PRP
+- Dashboard replaces HomeScreen as initial route after auth
+- Reuses existing VerificationBadge component
+- Activity feed has stubs for comments/alerts (implemented in Search/Moderation PRPs)
+- Statistics calculated server-side
+
+### Notes for Search PRP
+- PostgreSQL full-text search requires custom tsvector type in Drizzle ORM
+- Use generatedAlwaysAs() for automatic search column updates
+- GIN index required for performance
+- TinEye API: $200/5000 searches (starter), sandbox available for testing
+- Saved alerts limited to 5 per user (free tier)
+- Push notifications via Expo Push API
+
+### Notes for Moderation System PRP
+- Audit logs are append-only (INSERT only, never UPDATE/DELETE)
+- Appeals have 14-day window
+- AI flagging threshold: >0.7 score → add to queue (not auto-remove)
+- All moderation copy must follow BRAND_VOICE_GUIDE.md
+- "We've paused this post" not "This violates our rules"
 
 ### Notes for Identity Verification Migration (Jumio → Didit.me)
 - Didit.me uses simpler x-api-key header auth (vs Jumio's Basic Auth)

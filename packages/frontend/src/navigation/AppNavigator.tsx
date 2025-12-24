@@ -2,7 +2,7 @@ import React from 'react'
 import { ActivityIndicator, View, StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeScreen, PostCreationScreen } from '../screens'
+import { HomeScreen, PostCreationScreen, DashboardScreen } from '../screens'
 import {
   LoginScreen,
   SignUpScreen,
@@ -26,6 +26,7 @@ export type AuthStackParamList = {
 }
 
 export type AppStackParamList = {
+  Dashboard: undefined
   Home: undefined
   MFAEnroll: undefined
   PostCreation: undefined
@@ -63,6 +64,11 @@ function MainNavigator() {
         contentStyle: { backgroundColor: colors.background },
       }}
     >
+      <AppStack.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{ title: 'BetweenUs' }}
+      />
       <AppStack.Screen
         name="Home"
         component={HomeScreen}

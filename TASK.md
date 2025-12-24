@@ -60,6 +60,15 @@
 - [ ] Frontend WebView loads Didit verification UI (requires running backend)
 - [ ] End-to-end flow works on physical device (requires Didit credentials)
 
+### 2025-12-24 - Dashboard (PRP Executed)
+- [x] Created dashboard screen structure
+- [x] Created activity feed component with stubs
+- [x] Created statistics component with server-side calculations
+- [x] Integrated existing VerificationBadge component
+- [x] Updated navigation to set Dashboard as initial route post-auth
+- [x] Validated: yarn type-check passes for all packages
+- [ ] Create backend dashboard tests (deferred)
+
 ### 2025-12-23 - Project Scaffolding (PRP Executed)
 - [x] Created root workspace configuration (package.json)
 - [x] Created base TypeScript configuration (tsconfig.base.json)
@@ -128,9 +137,6 @@
 ---
 
 ## Pending Tasks
-
-### Execute PRP: Dashboard (Priority: High)
-- [ ] Execute PRPs/dashboard.md (16 tasks)
 
 ### Execute PRP: Search (Priority: High)
 - [ ] Execute PRPs/search.md (32 tasks)

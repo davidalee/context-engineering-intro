@@ -6,6 +6,8 @@ import { analyzeContent, type ContentAnalysisResult } from './content-filter.ser
 import { moderateContent, isSeverelyFlagged } from './moderation.service.js'
 import { generateRewrites } from './auto-rewrite.service.js'
 import { brandVoicePrompts } from '../utils/brand-voice.js'
+import { checkAlertsForPost } from './alerts.service.js'
+import { logger } from '../utils/index.js'
 
 export type CreatePostResult = {
   post: Post
@@ -45,6 +47,12 @@ export async function createPost(
 
   const db = getDatabase()
   const [post] = await db.insert(posts).values(newPost).returning()
+
+  if (post.status === 'published') {
+    checkAlertsForPost(post.id).catch((error) => {
+      logger.error('Failed to check alerts for post', { postId: post.id, error })
+    })
+  }
 
   return {
     post,

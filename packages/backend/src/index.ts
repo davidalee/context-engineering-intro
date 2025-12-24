@@ -1,7 +1,16 @@
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
-import { healthRoutes, authRoutes, webhookRoutes, postsRoutes, verificationRoutes, dashboardRoutes } from './routes/index.js'
+import {
+  healthRoutes,
+  authRoutes,
+  webhookRoutes,
+  postsRoutes,
+  verificationRoutes,
+  dashboardRoutes,
+  searchRoutes,
+  alertsRoutes,
+} from './routes/index.js'
 import { errorMiddleware } from './middleware/index.js'
 import { logger } from './utils/index.js'
 
@@ -25,6 +34,8 @@ app.use('/api/webhooks', webhookRoutes)
 app.use('/api/posts', postsRoutes)
 app.use('/api/verification', verificationRoutes)
 app.use('/api/dashboard', dashboardRoutes)
+app.use('/api/search', searchRoutes)
+app.use('/api/alerts', alertsRoutes)
 
 app.use(errorMiddleware)
 

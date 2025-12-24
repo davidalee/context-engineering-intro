@@ -15,6 +15,12 @@ import {
   VerificationWebViewScreen,
   VerificationCompleteScreen,
 } from '../screens/verification'
+import {
+  SearchScreen,
+  SearchResultsScreen,
+  AlertsManageScreen,
+} from '../screens/search'
+import type { SearchType } from '@betweenus/shared'
 import { useAuth } from '../contexts/AuthContext'
 import { colors } from '../theme/colors'
 
@@ -33,6 +39,9 @@ export type AppStackParamList = {
   VerificationIntro: undefined
   VerificationWebView: { verificationUrl: string; sessionId: string }
   VerificationComplete: { sessionId: string }
+  Search: undefined
+  SearchResults: { type: SearchType; query: string; location?: string }
+  AlertsManage: undefined
 }
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -98,6 +107,21 @@ function MainNavigator() {
         name="VerificationComplete"
         component={VerificationCompleteScreen}
         options={{ title: 'Verification Status', headerBackVisible: false }}
+      />
+      <AppStack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{ title: 'Search' }}
+      />
+      <AppStack.Screen
+        name="SearchResults"
+        component={SearchResultsScreen}
+        options={{ title: 'Search Results' }}
+      />
+      <AppStack.Screen
+        name="AlertsManage"
+        component={AlertsManageScreen}
+        options={{ title: 'Saved Alerts' }}
       />
     </AppStack.Navigator>
   )

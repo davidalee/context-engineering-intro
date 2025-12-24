@@ -1,4 +1,4 @@
-import { pgTable, integer, text, timestamp, uuid, boolean, pgEnum, jsonb } from 'drizzle-orm/pg-core'
+import { pgTable, integer, text, timestamp, uuid, boolean, pgEnum, jsonb, index } from 'drizzle-orm/pg-core'
 
 export const appRoleEnum = pgEnum('app_role', ['admin', 'moderator', 'member'])
 
@@ -85,15 +85,51 @@ export type TriggerMatch = {
 export const posts = pgTable('posts', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   userId: uuid('user_id').notNull(),
+  subjectName: text('subject_name'),
   originalText: text('original_text').notNull(),
   rewrittenText: text('rewritten_text'),
+  location: text('location'),
   status: postStatusEnum('status').notNull().default('draft'),
   moderationFlags: jsonb('moderation_flags').$type<ModerationFlags>(),
   triggerMatches: jsonb('trigger_matches').$type<TriggerMatch[]>(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
-})
+}, (t) => [
+  index('idx_posts_subject_name').on(t.subjectName),
+  index('idx_posts_location').on(t.location),
+])
 
 export type Post = typeof posts.$inferSelect
 export type NewPost = typeof posts.$inferInsert
+
+export const nameAlerts = pgTable('name_alerts', {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  userId: uuid('user_id').notNull(),
+  searchName: text('search_name').notNull(),
+  normalizedName: text('normalized_name').notNull(),
+  location: text('location'),
+  isActive: boolean('is_active').default(true).notNull(),
+  lastMatchedAt: timestamp('last_matched_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (t) => [
+  index('idx_alerts_user').on(t.userId),
+  index('idx_alerts_normalized_name').on(t.normalizedName),
+])
+
+export type NameAlert = typeof nameAlerts.$inferSelect
+export type NewNameAlert = typeof nameAlerts.$inferInsert
+
+export const pushTokens = pgTable('push_tokens', {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  userId: uuid('user_id').notNull(),
+  token: text('token').notNull().unique(),
+  platform: text('platform').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (t) => [
+  index('idx_push_tokens_user').on(t.userId),
+])
+
+export type PushToken = typeof pushTokens.$inferSelect
+export type NewPushToken = typeof pushTokens.$inferInsert

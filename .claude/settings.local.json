@@ -31,7 +31,10 @@
       "Bash(npm run type-check:all:*)",
       "Skill(generate-prp)",
       "Bash(xargs ls:*)",
-      "WebFetch(domain:orm.drizzle.team)"
+      "WebFetch(domain:orm.drizzle.team)",
+      "Bash(npm run type-check:backend:*)",
+      "Bash(npm run type-check:frontend:*)",
+      "Bash(npm run type-check:*)"
     ],
     "deny": []
   }

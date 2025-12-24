@@ -60,6 +60,32 @@
 - [ ] Frontend WebView loads Didit verification UI (requires running backend)
 - [ ] End-to-end flow works on physical device (requires Didit credentials)
 
+### 2025-12-24 - Search (PRP Executed)
+- [x] Created custom tsvector type for Drizzle ORM (packages/backend/src/utils/tsvector.ts)
+- [x] Updated database schema: added subjectName, location to posts; created nameAlerts, pushTokens tables
+- [x] Created shared types: search.types.ts, alert.types.ts
+- [x] Created shared schemas: search.schemas.ts, alert.schemas.ts
+- [x] Created TinEye configuration (packages/backend/src/config/tineye.ts)
+- [x] Created search service with PostgreSQL full-text search (searchByName, searchByKeyword)
+- [x] Created image search service with TinEye API integration
+- [x] Created alerts service with 5-alert limit per user
+- [x] Created push notification service (Expo Push API)
+- [x] Created search controller (handleNameSearch, handleKeywordSearch, handleImageSearch)
+- [x] Created alerts controller (handleCreateAlert, handleGetAlerts, handleDeleteAlert)
+- [x] Created search routes (GET /api/search/name, GET /api/search/keyword, POST /api/search/image)
+- [x] Created alerts routes (GET/POST /api/alerts, DELETE /api/alerts/:id)
+- [x] Updated posts service to trigger alert check on publish
+- [x] Created frontend search service and alerts service
+- [x] Created useSearch and useAlerts hooks
+- [x] Created search components: SearchBar, SearchTypeSelector, LocationFilter, ImageUploader, SearchResultCard, SaveAlertButton
+- [x] Created search screens: SearchScreen, SearchResultsScreen, AlertsManageScreen
+- [x] Updated navigation with Search, SearchResults, AlertsManage routes
+- [x] Installed expo-image-picker for image upload
+- [x] Validated: yarn type-check passes for all packages
+- [ ] Run database migration (requires db:generate && db:migrate)
+- [ ] Add rate limiting to search endpoints (deferred)
+- [ ] Create backend/frontend tests (deferred)
+
 ### 2025-12-24 - Dashboard (PRP Executed)
 - [x] Created dashboard screen structure
 - [x] Created activity feed component with stubs
@@ -137,9 +163,6 @@
 ---
 
 ## Pending Tasks
-
-### Execute PRP: Search (Priority: High)
-- [ ] Execute PRPs/search.md (32 tasks)
 
 ### Execute PRP: Moderation System (Priority: High)
 - [ ] Execute PRPs/moderation-system.md (35 tasks)
@@ -251,11 +274,13 @@
 
 ### Notes for Search PRP
 - PostgreSQL full-text search requires custom tsvector type in Drizzle ORM
-- Use generatedAlwaysAs() for automatic search column updates
-- GIN index required for performance
+- Using to_tsvector/to_tsquery inline instead of generated columns (simpler migration)
+- GIN index not added yet - may need manual SQL for performance at scale
 - TinEye API: $200/5000 searches (starter), sandbox available for testing
 - Saved alerts limited to 5 per user (free tier)
 - Push notifications via Expo Push API
+- Brand voice: "experiences" not "reports", "{count} people shared similar experiences"
+- Search requires TINEYE_API_KEY env var for image search (optional feature)
 
 ### Notes for Moderation System PRP
 - Audit logs are append-only (INSERT only, never UPDATE/DELETE)

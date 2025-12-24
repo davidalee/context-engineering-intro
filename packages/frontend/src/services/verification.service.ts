@@ -92,7 +92,7 @@ export function getStatusDisplayInfo(status: VerificationStatus | null): {
   color: 'success' | 'warning' | 'error' | 'info'
   canRetry: boolean
 } {
-  if (!status || status === 'pending') {
+  if (!status || status === 'not_started') {
     return {
       label: 'Not Verified',
       description: 'Verify your identity to unlock all features',
@@ -102,10 +102,17 @@ export function getStatusDisplayInfo(status: VerificationStatus | null): {
   }
 
   switch (status) {
-    case 'processing':
+    case 'in_progress':
       return {
         label: 'In Progress',
         description: 'Your verification is being processed',
+        color: 'warning',
+        canRetry: false,
+      }
+    case 'in_review':
+      return {
+        label: 'Under Review',
+        description: 'Your verification requires manual review',
         color: 'warning',
         canRetry: false,
       }
@@ -116,17 +123,31 @@ export function getStatusDisplayInfo(status: VerificationStatus | null): {
         color: 'success',
         canRetry: false,
       }
-    case 'denied':
+    case 'declined':
       return {
         label: 'Verification Failed',
         description: 'Your verification was not approved. You can try again.',
         color: 'error',
         canRetry: true,
       }
-    case 'error':
+    case 'expired':
+      return {
+        label: 'Session Expired',
+        description: 'Your verification session timed out. Please try again.',
+        color: 'error',
+        canRetry: true,
+      }
+    case 'abandoned':
+      return {
+        label: 'Verification Incomplete',
+        description: 'You did not complete verification. Please try again.',
+        color: 'error',
+        canRetry: true,
+      }
+    case 'kyc_expired':
       return {
         label: 'Verification Expired',
-        description: 'Your session expired. Please try again.',
+        description: 'Your verification has expired and needs renewal.',
         color: 'error',
         canRetry: true,
       }

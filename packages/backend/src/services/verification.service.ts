@@ -52,7 +52,7 @@ export async function updateVerificationStatus(
       .where(eq(profiles.id, userId))
 
     logger.info('User verified successfully', { userId, transactionReference })
-  } else if (data.status === 'denied') {
+  } else if (data.status === 'declined') {
     logger.info('User verification denied', {
       userId,
       transactionReference,

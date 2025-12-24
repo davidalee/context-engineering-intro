@@ -1,11 +1,14 @@
 import { z } from 'zod'
 
 export const verificationStatusEnum = z.enum([
-  'pending',
-  'processing',
+  'not_started',
+  'in_progress',
   'approved',
-  'denied',
-  'error',
+  'declined',
+  'kyc_expired',
+  'in_review',
+  'expired',
+  'abandoned',
 ])
 
 export const initiateVerificationResponseSchema = z.object({

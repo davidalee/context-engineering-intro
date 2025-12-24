@@ -43,38 +43,43 @@ export function VerificationCompleteScreen({ navigation }: Props) {
 
   const statusInfo = getStatusDisplayInfo(status)
 
+  const processingStatuses: VerificationStatus[] = ['in_progress', 'in_review']
+  const errorStatuses: VerificationStatus[] = ['declined', 'expired', 'abandoned', 'kyc_expired']
+  const isProcessing = status && processingStatuses.includes(status)
+  const isError = status && errorStatuses.includes(status)
+
   const getStatusIcon = () => {
-    if (isLoading || status === 'processing') {
+    if (isLoading || isProcessing) {
       return <ActivityIndicator size="large" color={colors.primary} />
     }
 
-    switch (status) {
-      case 'approved':
-        return (
-          <View style={[styles.iconCircle, { backgroundColor: colors.successBackground }]}>
-            <Text variant="h1" style={{ color: colors.success }}>
-              ✓
-            </Text>
-          </View>
-        )
-      case 'denied':
-      case 'error':
-        return (
-          <View style={[styles.iconCircle, { backgroundColor: colors.errorBackground }]}>
-            <Text variant="h1" style={{ color: colors.error }}>
-              ✗
-            </Text>
-          </View>
-        )
-      default:
-        return (
-          <View style={[styles.iconCircle, { backgroundColor: colors.warningBackground }]}>
-            <Text variant="h1" style={{ color: colors.warning }}>
-              ⏳
-            </Text>
-          </View>
-        )
+    if (status === 'approved') {
+      return (
+        <View style={[styles.iconCircle, { backgroundColor: colors.successBackground }]}>
+          <Text variant="h1" style={{ color: colors.success }}>
+            ✓
+          </Text>
+        </View>
+      )
     }
+
+    if (isError) {
+      return (
+        <View style={[styles.iconCircle, { backgroundColor: colors.errorBackground }]}>
+          <Text variant="h1" style={{ color: colors.error }}>
+            ✗
+          </Text>
+        </View>
+      )
+    }
+
+    return (
+      <View style={[styles.iconCircle, { backgroundColor: colors.warningBackground }]}>
+        <Text variant="h1" style={{ color: colors.warning }}>
+          ⏳
+        </Text>
+      </View>
+    )
   }
 
   return (
@@ -92,7 +97,7 @@ export function VerificationCompleteScreen({ navigation }: Props) {
             : statusInfo.description}
         </Text>
 
-        {status === 'processing' && (
+        {isProcessing && (
           <View style={styles.processingNote}>
             <Text variant="caption" color="textSecondary" style={styles.processingText}>
               This usually takes just a few seconds. We'll update this page automatically.

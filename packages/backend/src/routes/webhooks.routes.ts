@@ -63,12 +63,12 @@ function mapJumioStatusToVerificationStatus(
       return 'approved'
     case 'REJECTED':
     case 'FAILED':
-      return 'denied'
+      return 'declined'
     case 'PENDING':
     case 'MANUAL_REVIEW':
-      return 'processing'
+      return 'in_review'
     default:
-      return 'error'
+      return 'not_started'
   }
 }
 
@@ -96,7 +96,7 @@ router.post('/jumio', async (req, res, next) => {
     const idType = idVerification?.data?.type
     const idCountry = idVerification?.data?.issuingCountry
     const rejectReason =
-      status === 'denied'
+      status === 'declined'
         ? body.decision?.details?.label || 'Verification failed'
         : undefined
 
@@ -193,7 +193,7 @@ router.post('/didit', async (req, res, next) => {
     const status = mapDiditStatus(diditStatus)
     const idType = decision?.document_type
     const idCountry = decision?.issuing_country
-    const declineReason = status === 'denied'
+    const declineReason = status === 'declined'
       ? decision?.decline_reasons?.join(', ') || 'Verification failed'
       : undefined
 

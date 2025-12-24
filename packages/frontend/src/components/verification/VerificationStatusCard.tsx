@@ -52,7 +52,8 @@ export function VerificationStatusCard({
 
   const handlePress = () => {
     if (statusInfo.canRetry) {
-      if (status === 'denied' || status === 'error') {
+      const retryableStatuses = ['declined', 'expired', 'abandoned', 'kyc_expired']
+      if (status && retryableStatuses.includes(status)) {
         onRetry?.()
       } else {
         onStartVerification?.()

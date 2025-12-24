@@ -10,11 +10,14 @@ export const postStatusEnum = pgEnum('post_status', [
 ])
 
 export const verificationStatusEnum = pgEnum('verification_status', [
-  'pending',
-  'processing',
+  'not_started',
+  'in_progress',
   'approved',
-  'denied',
-  'error',
+  'declined',
+  'kyc_expired',
+  'in_review',
+  'expired',
+  'abandoned',
 ])
 
 export const healthChecks = pgTable('health_checks', {
@@ -43,7 +46,7 @@ export const userRoles = pgTable('user_roles', {
 
 export const userVerificationStatus = pgTable('user_verification_status', {
   userId: uuid('user_id').primaryKey(),
-  status: verificationStatusEnum('status').default('pending').notNull(),
+  status: verificationStatusEnum('status').default('not_started').notNull(),
   provider: text('provider'),
   verifiedAt: timestamp('verified_at'),
   idType: text('id_type'),

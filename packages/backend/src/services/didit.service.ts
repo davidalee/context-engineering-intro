@@ -16,26 +16,24 @@ export interface DiditSessionResponse {
   url: string
 }
 
+const VALID_STATUSES: Set<VerificationStatus> = new Set([
+  'not_started',
+  'in_progress',
+  'approved',
+  'declined',
+  'kyc_expired',
+  'in_review',
+  'expired',
+  'abandoned',
+])
+
 export function mapDiditStatus(diditStatus: string): VerificationStatus {
-  const normalizedStatus = diditStatus.toLowerCase().replace(/\s+/g, '_')
-  switch (normalizedStatus) {
-    case 'not_started':
-      return 'pending'
-    case 'in_progress':
-    case 'in_review':
-      return 'processing'
-    case 'approved':
-      return 'approved'
-    case 'declined':
-      return 'denied'
-    case 'expired':
-    case 'abandoned':
-    case 'kyc_expired':
-      return 'error'
-    default:
-      logger.warn('Unknown Didit status', { diditStatus })
-      return 'error'
+  const normalizedStatus = diditStatus.toLowerCase().replace(/\s+/g, '_') as VerificationStatus
+  if (VALID_STATUSES.has(normalizedStatus)) {
+    return normalizedStatus
   }
+  logger.warn('Unknown Didit status', { diditStatus })
+  return 'not_started'
 }
 
 export async function createSession(
@@ -80,14 +78,14 @@ export async function createSession(
     .insert(userVerificationStatus)
     .values({
       userId,
-      status: 'pending',
+      status: 'not_started',
       provider: 'didit',
       transactionReference: sessionId,
     })
     .onConflictDoUpdate({
       target: userVerificationStatus.userId,
       set: {
-        status: 'pending',
+        status: 'not_started',
         provider: 'didit',
         transactionReference: sessionId,
         updatedAt: new Date(),

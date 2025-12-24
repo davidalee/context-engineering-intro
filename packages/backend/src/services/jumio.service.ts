@@ -57,14 +57,14 @@ export async function initiateVerification(
     .insert(userVerificationStatus)
     .values({
       userId,
-      status: 'processing',
+      status: 'in_progress',
       provider: 'jumio',
       transactionReference,
     })
     .onConflictDoUpdate({
       target: userVerificationStatus.userId,
       set: {
-        status: 'processing',
+        status: 'in_progress',
         provider: 'jumio',
         transactionReference,
         updatedAt: new Date(),

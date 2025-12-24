@@ -1,11 +1,14 @@
 export type AppRole = 'admin' | 'moderator' | 'member'
 
 export type VerificationStatus =
-  | 'pending'
-  | 'processing'
+  | 'not_started'
+  | 'in_progress'
   | 'approved'
-  | 'denied'
-  | 'error'
+  | 'declined'
+  | 'kyc_expired'
+  | 'in_review'
+  | 'expired'
+  | 'abandoned'
 
 export interface AuthUser {
   id: string

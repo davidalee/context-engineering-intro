@@ -56,7 +56,11 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
         [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
       )
     } catch (error) {
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.')
+      console.error('SignUp Error Details:', error)
+      const errorMessage = error instanceof Error
+        ? `${error.message}\n\nCheck console for details.`
+        : 'An unexpected error occurred. Please try again.'
+      Alert.alert('Error', errorMessage)
     } finally {
       setIsLoading(false)
     }

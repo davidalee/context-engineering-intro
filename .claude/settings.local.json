@@ -34,7 +34,12 @@
       "WebFetch(domain:orm.drizzle.team)",
       "Bash(npm run type-check:backend:*)",
       "Bash(npm run type-check:frontend:*)",
-      "Bash(npm run type-check:*)"
+      "Bash(npm run type-check:*)",
+      "Bash(xcrun simctl:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(convert:*)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:openai.com)"
     ],
     "deny": []
   }

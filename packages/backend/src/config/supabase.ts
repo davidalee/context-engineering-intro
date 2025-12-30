@@ -8,17 +8,17 @@ export function getSupabaseClient(): SupabaseClient {
   }
 
   const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY
 
   if (!supabaseUrl) {
     throw new Error('SUPABASE_URL environment variable is required')
   }
 
-  if (!supabaseServiceRoleKey) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY environment variable is required')
+  if (!supabaseSecretKey) {
+    throw new Error('SUPABASE_SECRET_KEY environment variable is required')
   }
 
-  supabaseInstance = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  supabaseInstance = createClient(supabaseUrl, supabaseSecretKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,

@@ -1,5 +1,97 @@
 # BetweenUs - Task Tracker
 
+## Pending Tasks
+
+### 2025-12-30 - PRP Generation
+- [x] Generated content-moderation-privacy.md PRP (28 tasks, confidence 8/10) - PII anonymization, consent flow, ZDR application, audit logging
+
+### Execute PRP: Content Moderation Privacy (Priority: High)
+- [ ] Execute PRPs/content-moderation-privacy.md (28 tasks)
+  - PII anonymization before OpenAI API calls
+  - User consent management for AI moderation
+  - Apply for OpenAI Zero Data Retention (PHI justification)
+  - Privacy audit logging
+  - Frontend consent screens and privacy badges
+
+### Execute PRP: Moderation System (Priority: High)
+- [ ] Execute PRPs/moderation-system.md (35 tasks)
+
+### Generate PRP: Create testing harness for content moderation
+- [ ] Test OpenAI's Moderation API with various content samples
+- [ ] Create a suite of test cases covering edge cases and false positives
+- [ ] Automate testing of moderation workflows
+- [ ] Document testing procedures and results
+
+### Generate PRP: Notifications PRP (Priority: Medium)
+- [ ] Push notification infrastructure (Expo Push, Firebase)
+- [ ] Name match alerts
+- [ ] New comment notifications
+- [ ] Moderation action notifications
+- [ ] Notification preferences settings
+
+### Generate PRP: Privacy & Security PRP (Priority: Medium)
+- [ ] Screenshot blocking (react-native-screenshot-prevent)
+- [ ] Screen recording prevention
+- [ ] Secure view containers for sensitive content
+
+### Generate PRP: Photo Upload PRP (Priority: Medium)
+- [ ] Image upload on posts and comments
+- [ ] Image storage (Supabase Storage or S3)
+- [ ] Image compression and optimization
+- [ ] NSFW image detection
+
+### Generate PRP: Background Check Integration PRP (Priority: Low)
+- [ ] Checkr/GoodHire API integration
+- [ ] Sex offender registry lookup
+- [ ] Paid feature gating (Stripe/RevenueCat)
+- [ ] Results display UI
+
+### Generate PRP: Real-time Updates PRP (Priority: Low)
+- [ ] WebSocket infrastructure
+- [ ] Live comment updates
+- [ ] Real-time notifications
+- [ ] Online presence indicators
+
+### Generate PRP: Legal & Compliance PRP (Priority: Low)
+- [ ] GDPR/CCPA compliance features
+- [ ] Data export functionality
+- [ ] Account deletion flow
+- [ ] Data retention policies
+- [ ] Terms of Service / Privacy Policy screens
+
+### Create PLANNING.md Document
+- [ ] Document overall project architecture, goals, style, and constraints
+- [ ] Define naming conventions, file structure, and architecture patterns
+- [ ] Outline testing strategies and reliability goals
+
+### Add messaging around compliance and safety in the app
+- [ ] Onboarding screens
+- [ ] FAQ section
+- [ ] In-app tips and reminders
+- [ ] (TODO: REVISE THIS LIST) Comply with KYC, AML, CCPA, GDPR and many more privacy regulations and directives
+- [ ] Data encryption at rest and in transit using industry-standard protocols
+- [ ] Regular security audits and vulnerability assessments
+- [ ] User data access controls and permissions management
+- [ ] Incident response plan for data breaches or security incidents
+- [ ] Employee training on data privacy and security best practices
+- [ ] Clear data retention and deletion policies communicated to users
+- [ ] Third-party vendor risk management for any integrated services
+- [ ] Continuous monitoring of systems for suspicious activity or potential threats
+- [ ] Compliance with international data transfer regulations (e.g., GDPR cross-border rules)
+- [ ] Regular updates to privacy policies and terms of service to reflect current practices and legal requirements
+- [ ] User-friendly mechanisms for users to manage their privacy settings and data preferences
+- [ ] Accessibility features to ensure compliance with standards like WCAG for users with disabilities
+- [ ] Implementation of multi-factor authentication (MFA) for enhanced account security
+- [ ] Secure coding practices to prevent common vulnerabilities (e.g., OWASP Top 10)
+- [ ] Data anonymization techniques for any analytics or research purposes
+- [ ] Regular backups of user data with secure storage solutions
+- [ ] Transparent communication with users regarding any changes to data practices or security measures
+- [ ] Collaboration with legal experts to stay updated on evolving data protection laws and regulations
+- [ ] Implementation of user consent mechanisms for data collection and processing activities
+- [ ] All data is transmitted and stored with strong AES 256-bit encryption. Didit.me handles identity verification with AI-native fraud detection
+
+---
+
 ## Completed Tasks
 
 ### 2025-12-23 - PRP Generation
@@ -162,81 +254,6 @@
 
 ---
 
-## Pending Tasks
-
-### Execute PRP: Moderation System (Priority: High)
-- [ ] Execute PRPs/moderation-system.md (35 tasks)
-
-### Generate PRP: Notifications PRP (Priority: Medium)
-- [ ] Push notification infrastructure (Expo Push, Firebase)
-- [ ] Name match alerts
-- [ ] New comment notifications
-- [ ] Moderation action notifications
-- [ ] Notification preferences settings
-
-### 6. Generate PRP: Privacy & Security PRP (Priority: Medium)
-- [ ] Screenshot blocking (react-native-screenshot-prevent)
-- [ ] Screen recording prevention
-- [ ] Secure view containers for sensitive content
-
-### 7. Generate PRP: Photo Upload PRP (Priority: Medium)
-- [ ] Image upload on posts and comments
-- [ ] Image storage (Supabase Storage or S3)
-- [ ] Image compression and optimization
-- [ ] NSFW image detection
-
-### 8. Generate PRP: Background Check Integration PRP (Priority: Low)
-- [ ] Checkr/GoodHire API integration
-- [ ] Sex offender registry lookup
-- [ ] Paid feature gating (Stripe/RevenueCat)
-- [ ] Results display UI
-
-### 9. Generate PRP: Real-time Updates PRP (Priority: Low)
-- [ ] WebSocket infrastructure
-- [ ] Live comment updates
-- [ ] Real-time notifications
-- [ ] Online presence indicators
-
-### 10. Generate PRP: Legal & Compliance PRP (Priority: Low)
-- [ ] GDPR/CCPA compliance features
-- [ ] Data export functionality
-- [ ] Account deletion flow
-- [ ] Data retention policies
-- [ ] Terms of Service / Privacy Policy screens
-
-### 11. Create PLANNING.md Document
-- [ ] Document overall project architecture, goals, style, and constraints
-- [ ] Define naming conventions, file structure, and architecture patterns
-- [ ] Outline testing strategies and reliability goals
-
-### 12. Add messaging around compliance and safety in the app
-- [ ] Onboarding screens
-- [ ] FAQ section
-- [ ] In-app tips and reminders
-- [ ] (TODO: REVISE THIS LIST) Comply with KYC, AML, CCPA, GDPR and many more privacy regulations and directives
-- [ ] Data encryption at rest and in transit using industry-standard protocols
-- [ ] Regular security audits and vulnerability assessments
-- [ ] User data access controls and permissions management
-- [ ] Incident response plan for data breaches or security incidents
-- [ ] Employee training on data privacy and security best practices
-- [ ] Clear data retention and deletion policies communicated to users
-- [ ] Third-party vendor risk management for any integrated services
-- [ ] Continuous monitoring of systems for suspicious activity or potential threats
-- [ ] Compliance with international data transfer regulations (e.g., GDPR cross-border rules)
-- [ ] Regular updates to privacy policies and terms of service to reflect current practices and legal requirements
-- [ ] User-friendly mechanisms for users to manage their privacy settings and data preferences
-- [ ] Accessibility features to ensure compliance with standards like WCAG for users with disabilities
-- [ ] Implementation of multi-factor authentication (MFA) for enhanced account security
-- [ ] Secure coding practices to prevent common vulnerabilities (e.g., OWASP Top 10)
-- [ ] Data anonymization techniques for any analytics or research purposes
-- [ ] Regular backups of user data with secure storage solutions
-- [ ] Transparent communication with users regarding any changes to data practices or security measures
-- [ ] Collaboration with legal experts to stay updated on evolving data protection laws and regulations
-- [ ] Implementation of user consent mechanisms for data collection and processing activities
-- [ ] All data is transmitted and stored with strong AES 256-bit encryption. Didit.me handles identity verification with AI-native fraud detection
-
----
-
 ## Discovered During Work
 
 ### Notes for Authentication PRP
@@ -297,31 +314,3 @@
 - Existing verification.service.ts is mostly reusable (updateVerificationStatus works with both)
 - Database schema already compatible - no migration needed
 - Rate limits: Free plan = 5 sessions/minute, Paid = 600 sessions/minute
-
----
-
-## Quick Reference
-
-### Running the Project
-```bash
-# Install dependencies
-yarn install
-
-# Start backend (Terminal 1)
-yarn workspace @betweenus/backend dev
-
-# Start frontend (Terminal 2)
-yarn workspace @betweenus/frontend dev
-```
-
-### Database Setup
-```bash
-# Create database
-createdb betweenus
-
-# Generate migrations
-yarn workspace @betweenus/backend db:generate
-
-# Run migrations
-yarn workspace @betweenus/backend db:migrate
-```

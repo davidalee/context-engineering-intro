@@ -16,7 +16,12 @@
 ### Execute PRP: Moderation System (Priority: High)
 - [ ] Execute PRPs/moderation-system.md (35 tasks)
 
-### Generate PRP: Create testing harness for content moderation
+### Generate PRP: Consider what types of posts are allowed (Priority: High)
+- [ ] Reconsider the existing posting framework, voice guide, and inline tooltips
+- [ ] Identify any gaps or ambiguities in current rules
+- [ ] See this chat for some interesting borderline cases it raises, and different methods for mitigating them noted at the end of the response: https://chatgpt.com/g/g-p-694b12a0cad081919c75974c33a6560e-betweenus/c/695447c4-7d10-8332-a460-8d2a77d6c7c8
+
+### Generate PRP: Create testing harness for content moderation (Priority: Medium)
 - [ ] Test OpenAI's Moderation API with various content samples
 - [ ] Create a suite of test cases covering edge cases and false positives
 - [ ] Automate testing of moderation workflows
@@ -89,6 +94,15 @@
 - [ ] Collaboration with legal experts to stay updated on evolving data protection laws and regulations
 - [ ] Implementation of user consent mechanisms for data collection and processing activities
 - [ ] All data is transmitted and stored with strong AES 256-bit encryption. Didit.me handles identity verification with AI-native fraud detection
+
+### Generate PRP: Follow up with users on dates they've gone on
+- [ ] Create a system to send follow-up messages to users after dates
+  - [ ] Design message content to gather feedback on their experience with minimal friction
+  - [ ] Based on users they've looked up? Or some other trigger?
+  - We really want to incentivize users to share information about their dates to build out the database, but we also want to make it as easy and non-intrusive as possible. This could be a simple one-tap survey where we ask them how the date went, if they felt safe, etc. And all they have to do is click one of the pre-filled responses, no typing required. They always have the option to share more detail.
+- [ ] Design message templates for feedback requests
+- [ ] Implement scheduling logic for sending messages
+- [ ] Track user responses and store feedback data
 
 ---
 
